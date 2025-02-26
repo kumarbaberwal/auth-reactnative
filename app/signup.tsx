@@ -9,16 +9,22 @@ export default function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
+    interface User {
+        email: string,
+        token: string,
+        _id: string,
+    }
 
     const handleRegister = async () => {
         try {
-            const response = await axios.post('http://192.168.208.140:6000/auth/register', {
+            const response = await axios.post<{ user: User }>('http://192.168.208.140:6000/auth/register', {
                 email: email, password: password
             });
 
             if (response.status === 201) {
-                const jsonValue = await JSON.stringify(response.data);
-                await AsyncStorage.setItem('user', jsonValue);
+                const user = response.data;
+                const email = user.user.email;
+                await AsyncStorage.setItem('userEmail', email);
                 router.push('/home');
             }
         } catch (error) {

@@ -48,6 +48,18 @@ export default function Index() {
                     Login
                 </ThemedText>
             </Pressable>
+            <ThemedView style={{ justifyContent: 'center', alignItems: 'center', width: '100%', flexDirection: 'row', gap: 10, }}>
+                <ThemedText>
+                    Didn't Signup?
+                </ThemedText>
+                <Pressable style={{}} onPress={() => {
+                    router.push('/signup');
+                }}>
+                    <ThemedText style={[styles.buttonText, { color: 'blue' }]}>
+                        Signup
+                    </ThemedText>
+                </Pressable>
+            </ThemedView>
         </ThemedView>
     )
 }
